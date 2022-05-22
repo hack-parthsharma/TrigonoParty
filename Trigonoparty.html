@@ -1,0 +1,938 @@
+<html lang="en">
+  <head>
+    <title>Trigono Party</title>
+  </head>
+  <body>
+    <div class="root">
+      <div class="content">
+        <div class="canvas-wrapper">
+          <canvas class="canvas" id="canvas" />
+        </div>
+        <aside class="drawer">
+          <div class="row block">
+            <div class="column">
+              <button id="togglePlay" class="button">Stop</button>
+            </div>
+          </div>
+          <details class="row">
+            <summary>general options</summary>
+            <div class="state-table">
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Round Numbers <input id="roundNumbers" type="checkbox" checked />
+                </label>
+              </div>
+            </div>
+          </details>
+          <details open class="row">
+            <summary>State Values</summary>
+            <div class="state-table">
+              <div class="row state-table-row">
+                <div class="column state-table-column">
+                  Degree <input id="stateDeg" type="text" disabled />
+                </div>
+                <div class="column state-table-column">
+                  Radian <input id="stateRad" type="text" disabled />
+                </div>
+                <div class="column state-table-column">
+                  Quandrant <input id="stateQua" type="text" disabled />
+                </div>
+              </div>
+              <div class="row state-table-row">
+                <div class="column state-table-column">
+                  Sine <input id="stateSin" type="text" disabled />
+                </div>
+                <div class="column state-table-column">
+                  Cosine <input id="stateCos" type="text" disabled />
+                </div>
+                <div class="column state-table-column">
+                  Tangent <input id="stateTan" type="text" disabled />
+                </div>
+              </div>
+              <div class="row state-table-row">
+                <div class="column state-table-column">
+                  Co-Tangent <input id="stateCot" type="text" disabled />
+                </div>
+                <div class="column state-table-column">
+                  Secant <input id="stateSec" type="text" disabled />
+                </div>
+                <div class="column state-table-column">
+                  Co-Secant <input id="stateCsc" type="text" disabled />
+                </div>
+              </div>
+            </div>
+          </details>
+          <details class="row">
+            <summary id="degreeTitle">Angle θ (-)</summary>
+            <div class="row zebra">
+              <div class="column">
+                <input id="degreeRange" type="range" min="-1" max="361" step="1" />
+              </div>
+              <div class="column">
+                <input id="degreeInput" type="number" min="-1" max="361" />
+              </div>
+            </div>
+          </details>
+          <details class="row">
+            <summary id="radiusTitle">Radius Scale (-)</summary>
+            <div class="row zebra">
+              <div class="column">
+                <input id="radiusRange" type="range" min="0" max="500" step="5" />
+              </div>
+              <div class="column">
+                <input id="radiusInput" type="number" min="0" />
+              </div>
+            </div>
+          </details>
+          <details class="row">
+            <summary id="stepTitle">Step by Frame (-)</summary>
+            <div class="row zebra">
+              <div class="column">
+                <input id="stepRange" type="range" min="0" max="1" step="0.01" />
+              </div>
+              <div class="column">
+                <input id="stepInput" type="number" min="0" step="0.01" />
+              </div>
+            </div>
+          </details>
+          <details class="row">
+            <summary>Draw Lines</summary>
+            <div class="state-table">
+              <div class="row state-table-row">
+                <label class="column state-table-column hidden-checkbox">
+                 Uncheck All <input id="drawNoLines" type="checkbox" />
+                </label>
+              </div>
+              <div class="column separator"></div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Radius <input id="drawLineRadius" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  X - Axis <input id="drawLineXAxis" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Y - Axis <input id="drawLineYAxis" type="checkbox" checked />
+                </label>
+              </div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Sine <input id="drawLineSin" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Cosine <input id="drawLineCos" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Tangent <input id="drawLineTan" type="checkbox" checked />
+                </label>
+              </div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Co-Tangent <input id="drawLineCot" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Secant <input id="drawLineSec" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Co-Secant <input id="drawLineCsc" type="checkbox" checked />
+                </label>
+              </div>
+            </div>
+          </details>
+          <details class="row">
+            <summary>Draw Names</summary>
+            <div class="state-table">
+              <div class="row state-table-row">
+                <label class="column state-table-column hidden-checkbox">
+                  Uncheck All <input id="drawNoNames" type="checkbox" />
+                </label>
+              </div>
+              <div class="column separator"></div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Full Name <input id="drawFullNames" type="checkbox" checked />
+                </label>
+              </div>
+              <div class="column separator"></div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  FPS <input id="drawNameFPS" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Info <input id="drawNameInfo" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Credits <input id="drawNameCredits" type="checkbox" checked />
+                </label>
+              </div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Radius <input id="drawNameRadius" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Theta <input id="drawNameTheta" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                </label>
+              </div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Sine <input id="drawNameSin" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Cosine <input id="drawNameCos" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Tangent <input id="drawNameTan" type="checkbox" checked />
+                </label>
+              </div>
+              <div class="row state-table-row">
+                <label class="column state-table-column">
+                  Co-Tangent <input id="drawNameCot" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Secant <input id="drawNameSec" type="checkbox" checked />
+                </label>
+                <label class="column state-table-column">
+                  Co-Secant <input id="drawNameCsc" type="checkbox" checked />
+                </label>
+              </div>
+            </div>
+          </details>
+          <div class="row separator"></div>
+          <div class="row block">
+          </div>
+        </aside>
+      </div>
+    </div>
+    <script>
+{
+  const DOM = {
+    getById: id => document.getElementById(id),
+    on: (element, event, fn) => element.addEventListener(event, fn),
+  };
+  
+  const toFixed = (value, to = 3, force) => (
+    (tp.config.roundNumbers || force) ? (+value).toFixed(to).padEnd(to, 0) : value
+  );
+
+  const checkboxElements = [
+    'roundNumbers',
+    'drawFullNames',
+    'drawLineRadius', 'drawLineXAxis', 'drawLineYAxis',
+    'drawLineSin', 'drawLineCos', 'drawLineTan',
+    'drawLineCot', 'drawLineSec', 'drawLineCsc',
+    'drawNameFPS', 'drawNameInfo', 'drawNameCredits',
+    'drawNameRadius', 'drawNameTheta',
+    'drawNameSin', 'drawNameCos', 'drawNameTan',
+    'drawNameCot', 'drawNameSec', 'drawNameCsc',
+  ];
+
+  const elements = [
+    'togglePlay',
+    'stateDeg', 'stateRad', 'stateQua',
+    'stateSin', 'stateCos', 'stateTan',
+    'stateCot', 'stateSec', 'stateCsc',
+    'degreeTitle', 'degreeRange', 'degreeInput',
+    'radiusTitle', 'radiusRange', 'radiusInput',
+    'stepTitle', 'stepRange', 'stepInput',
+    'drawNoLines', 'drawNoNames', 
+    ...checkboxElements,
+  ];
+
+  const $el = {};
+  
+  elements.forEach(id => $el[id] = DOM.getById(id))
+
+  const createControlCluster = (
+    key,
+    collection,
+    label,
+    {
+      fixTo,
+      updateOnResize,
+      updateOnEveryFrame,
+    } = {}
+  ) => {
+    const rangeInput = $el[`${key}Range`];
+    const textInput = $el[`${key}Input`];
+    const labelEl = $el[`${key}Title`];
+    const eventListener = (event, updateSelfOnly) => {
+      const value = toFixed(event.target.value, fixTo);
+
+      if (!updateSelfOnly) {
+        window.tp[collection][key] = +value;
+      }
+
+      if (rangeInput && event.target !== rangeInput) {
+        rangeInput.value = value;
+      }
+
+      if (textInput && event.target !== textInput) {
+        textInput.value = value;
+      }
+
+      if (labelEl) {
+        labelEl.innerText = typeof label === 'function' ? 
+          label(value, key) : `${key} (${value})`;  
+      }
+    };
+  
+    const getAndSetValue = () => {
+      eventListener({ target: { value: tp[collection][key] } }, true);
+
+      if (updateOnEveryFrame) {
+        window.requestAnimationFrame(getAndSetValue);
+      }
+    };
+
+    if (rangeInput) {
+      DOM.on(rangeInput, 'change', eventListener);
+      DOM.on(rangeInput, 'input', eventListener);
+    }
+
+    if (textInput) {
+      DOM.on(textInput, 'change', eventListener);
+      DOM.on(textInput, 'input', eventListener);
+    }
+
+    getAndSetValue();
+    updateOnResize && window.addEventListener('resize', () => setTimeout(getAndSetValue));
+  }
+
+  createControlCluster(
+    'degree', 'state',
+    value => `angle θ (${value}deg)`,
+    { fixTo: 0, updateOnEveryFrame: true, }
+  );
+
+  createControlCluster(
+    'radius', 'config',
+    value => `radius scale (${value === '0' ? 'auto' : `x${value}`})`,
+    { fixTo: 0, updateOnResize: true, }
+  );
+
+  createControlCluster(
+    'step', 'config',
+    value => `step by frame (${value}deg)`,
+    { fixTo: 2, }
+  );
+
+  DOM.on($el.togglePlay, 'click', () => {
+    tp.togglePlay();
+    $el.togglePlay.innerText = tp.config.play ? 'Stop' : 'Start';
+  });
+
+  const updateStateValues = () => {
+    const sin = +toFixed(tp.state.sin);
+    const cos = +toFixed(tp.state.cos);
+    $el.stateDeg.value = toFixed(tp.state.degree);
+    $el.stateRad.value = toFixed(tp.state.degreeInRad);
+    $el.stateQua.value = tp.state.quadrant;
+    $el.stateSin.value = toFixed(sin);
+    $el.stateCos.value = toFixed(cos);
+    $el.stateTan.value = cos === 0 ? 'Undefined' : toFixed(sin / cos);
+    $el.stateCot.value = sin === 0 ? 'Undefined' : toFixed(cos / sin);
+    $el.stateSec.value = cos === 0 ? 'Undefined' : toFixed(1 / cos);
+    $el.stateCsc.value = sin === 0 ? 'Undefined' : toFixed(1 / sin);
+    window.requestAnimationFrame(updateStateValues);
+  };
+  updateStateValues();
+
+  checkboxElements.forEach(checkbox => {
+    DOM.on($el[checkbox], 'change', function() {
+      window.tp.config[checkbox] = this.checked;
+    });
+  });
+
+  const setBulkCheckbox = (el, collection) => {
+    collection.forEach(item => {
+      tp.config[item] = $el[item].checked = !el.checked;
+    });
+
+    el.parentElement.childNodes[0].nodeValue =
+      el.checked ? 'check all' : 'uncheck all';
+  };
+
+  DOM.on($el.drawNoLines, 'click', function () {
+    setBulkCheckbox(this, [
+      'drawLineRadius', 'drawLineXAxis', 'drawLineYAxis',
+      'drawLineSin', 'drawLineCos', 'drawLineTan',
+      'drawLineCot', 'drawLineSec', 'drawLineCsc',
+    ]);
+  });
+
+  DOM.on($el.drawNoNames, 'click', function () {
+    setBulkCheckbox(this, [
+      'drawNameFPS', 'drawNameInfo', 'drawNameCredits', 
+      'drawNameRadius', 'drawNameTheta', 
+      'drawNameSin', 'drawNameCos', 'drawNameTan',
+      'drawNameCot', 'drawNameSec', 'drawNameCsc',
+    ]);
+  });
+}
+    </script>
+    <style>
+html, body, .root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+button, input, details, summary {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: #fff;
+  outline: none;
+  box-sizing: border-box; 
+}
+
+button, input {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button, label, summary {
+  user-select: none;
+  cursor: pointer;
+}
+
+button {
+  height: 32px;
+}
+
+button:hover, input:hover {
+  border: 1px solid #333;
+}
+
+input {
+  line-height: 16px;
+  height: 32px;
+  padding: 5px;
+}
+
+input[type='checkbox'] {
+  width: auto;
+  height: auto;
+  margin: 8px 0;
+}
+
+details {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+summary {
+  height: 22px;
+}
+
+summary, .overflow-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid #efefef;
+  box-shadow: 0px 0px 5px 0px rgba(34, 34, 34, 0.25);
+  background-color: #fff;
+}
+
+.canvas-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.drawer {
+  z-index: 2;
+  height: 100%;
+  overflow: auto;
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0px rgba(34, 34, 34, 0.25);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px; 
+  margin-bottom: 10px; 
+}
+
+.row.zebra {
+  background-color: #fafafa;
+}
+
+.column {
+  flex: 1;
+  margin: 0 10px; 
+}
+
+.column.input {
+  flex: 0 0 50px;
+}
+
+.column.shrink {
+  flex: 0;
+}
+
+.block {
+  display: block;
+}
+
+.separator {
+  border-bottom: 1px solid #ccc;
+}
+
+.state-table {
+  padding: 10px 0;
+}
+
+.state-table-row {
+}
+
+.state-table-column {
+  font-size: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 3px;
+  background-color: #fafafa;
+}
+
+.state-table-column input {
+  margin-top: 5px;
+  text-align: center;
+}
+
+label.state-table-column {
+  padding-top: 5px;
+}
+
+label.state-table-column.hidden-checkbox {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+label.state-table-column.hidden-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.github-button {
+  color: #fff;
+}
+
+@media only screen and (max-width:600px){
+  html, body, .root {
+    overflow: auto;
+    height: auto;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .canvas-wrapper {
+    width: 100%;
+    padding-bottom: 100%;
+  }
+
+  .drawer {
+    flex: auto;
+  }
+}
+    </style>
+    <script>
+{
+  const config = {
+    play: true,
+    radius: null,
+    step: 0.03,
+    roundNumbers: true,
+    drawLineRadius: true,
+    drawLineXAxis: true,
+    drawLineYAxis: true,
+    drawLineSin: true,
+    drawLineCos: true,
+    drawLineTan: true,
+    drawLineCot: true,
+    drawLineSec: true,
+    drawLineCsc: true,
+    drawFullNames: true,
+    drawNameRadius: true,
+    drawNameTheta: true,
+    drawNameFPS: true,
+    drawNameInfo: true,
+    drawNameCredits: true,
+    drawNameSin: true,
+    drawNameCos: true,
+    drawNameTan: true,
+    drawNameCot: true,
+    drawNameSec: true,
+    drawNameCsc: true,
+  };
+
+  const tPI = 2 * Math.PI;   
+  const COLORS = {
+    white: '#fff',
+    snow: '#fafafa',
+    gray: '#ccc',
+    night: '#34495e',
+    greenLight: '#E3F2E6',
+    greenDark: '#179746',
+    green: '#00B52A',
+    purple: '#8700b5',
+    orange: '#f48c42',
+    pink: '#f4427a',
+    blue: '#4286f4',
+    cyan: '#41cdf4',
+  };
+
+  const NAMES = {
+    full: {
+      sin: 'sinus',
+      cos: 'cosinus',
+      tan: 'tangent',
+      cot: 'cotangent',
+      sec: 'secant',
+      csc: 'cosecant',
+      r: 'radius',
+    },
+    short: {
+      sin: 'sin',
+      cos: 'cos',
+      tan: 'tan',
+      cot: 'cot',
+      sec: 'sec',
+      csc: 'csc',
+      r: 'r',
+    },
+  };
+
+  const state = {
+    degree: 45,
+  };
+
+  const $state = {
+    x: 0,
+    y: 0,
+    drag: false,
+  };
+
+  const canvasWrapper = document.querySelector(".canvas-wrapper");
+  const canvas = document.querySelector("canvas");
+  const degToRad = deg => deg / 360 * tPI;
+  const ctx = canvas.getContext("2d", { alpha: false });
+  ctx.imageSmoothingQuality = "high"
+  ctx.imageSmoothingEnabled = true;
+
+  const withAngle = (x, y, angle, fn) => {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(degToRad(angle));
+
+    fn();
+
+    ctx.restore();
+  };
+
+  const $drawText = (x, y, text, options = {}) => {
+    const {
+      color = COLORS.gray,
+      size = 14,
+      angle = 0,
+      align = 'center',
+      baseline = 'bottom',
+    } = options;
+
+    if (angle) {
+      options.angle = false;
+      
+      return withAngle(x, y, angle, () =>
+        $drawText(0, 0, text, options)
+      );
+    }
+
+    ctx.font = `${size}px sans-serif`;
+    ctx.textBaseline = baseline;
+    ctx.textAlign = align;
+    ctx.fillStyle = color;
+    ctx.fillText(text, x, y);
+  };
+
+  const $drawRect = (x, y, w, h, options = {}) => {
+    const {
+      color = COLORS.gray,
+      angle = 0,
+      fill = false,
+      lineWidth = 1.5,
+    } = options;
+
+    if (angle) {
+      options.angle = false;
+      
+      return withAngle(x, y, angle, () =>
+        $drawRect(0, 0, w, h, options)
+      );
+    }
+
+    ctx.lineWidth = lineWidth,
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.rect(x, y, w, h);
+    fill ? ctx.fill() : ctx.stroke();
+  }; 
+
+  const $drawLine = (fromX, fromY, toX, toY, {
+    color,
+    lineWidth,
+  }) => {
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(fromX, fromY);
+    ctx.lineTo(toX, toY);
+    ctx.stroke();
+  };
+
+  const $drawCircle = (x, y, r, {
+    color,
+    fill,
+    startAngle = 0,
+    endAngle = tPI,
+    aCW = true,
+    lineWidth = 1.5,
+  }) => {
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.moveTo(x, y);
+    ctx.beginPath();
+    fill && ctx.moveTo(x, y);
+    ctx.arc(x, y, r, startAngle, endAngle, aCW);
+    fill && ctx.closePath();
+    fill ? ctx.fill() : ctx.stroke();
+  };
+
+  let FPS = 0;
+  let lastDrawTime = performance.now();
+  let lastFPSUpdateTime = lastDrawTime;
+
+  const resetFPS = () => {
+    FPS = 0;
+    lastDrawTime = lastFPSUpdateTime = performance.now();
+  };
+
+  const calculateFPS = () => {
+    const now = performance.now();
+
+    if (now - lastFPSUpdateTime >= 100) {
+      lastFPSUpdateTime = now;
+      FPS = (1000 / (now - lastDrawTime)).toFixed(0);
+    }
+    
+    lastDrawTime = now;
+
+    return FPS;
+  };
+
+  const draw = (once) => {
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const x = $state.x = w / 2;
+    const y = $state.y = h / 2;
+    const r = config.radius = config.radius || Math.min(w, h) / 3;
+
+    const step = config.step;
+    const degree = state.degree;
+
+    const degreeInRad = degToRad(degree);
+    const sin = -Math.sin(degreeInRad);
+    const cos = Math.cos(degreeInRad);
+    const lineX = x + cos * r;
+    const lineY = y + sin * r;
+    const sinHeight = y - lineY;
+    const cosWidth = lineX - x;
+
+    const quadrant = { '01': 1, '00': 2, '10': 3, '11': 4 }[`${+(sin>0)}${+(cos>0)}`];
+    const evenQuad = (quadrant % 2);
+
+    const coDegree = evenQuad ? (90 - (degree % 90)) : (degree % 90);
+
+    const tanOfCoDegree = Math.tan(degToRad(coDegree));
+    const tanDistance = sinHeight / tanOfCoDegree;
+    const cotDistance = cosWidth / (1 / tanOfCoDegree);
+    
+    const tanX = evenQuad ? (lineX + tanDistance) : (lineX - tanDistance);
+    const cotY = evenQuad ? (lineY - cotDistance) : (lineY + cotDistance);
+
+    const tanCotAngle = evenQuad ? coDegree : -coDegree;
+
+    const name = config.drawFullNames ? NAMES.full : NAMES.short;
+
+    ctx.fillStyle = COLORS.white;
+    ctx.fillRect(0, 0, w, h);
+    
+    $drawCircle(x, y, r, { color: COLORS.gray });
+    $drawCircle(x, y, 20, { color: COLORS.snow, fill: true });
+    
+    config.drawLineXAxis && $drawLine(0, y, w, y, { color: COLORS.gray });
+    config.drawLineYAxis && $drawLine(x, 0, x, h, { color: COLORS.gray });
+
+    $drawCircle(x, y, 20, { color: COLORS.greenLight, fill: true, endAngle: degToRad(360 - degree) });
+    $drawCircle(x, y, 20, { color: COLORS.greenDark, endAngle: degToRad(360 - degree) });
+
+    config.drawNameTheta && $drawText(x + 20, y - 15, `θ`, { color: COLORS.greenDark, align: 'left' });
+
+    $drawCircle(x, y, 3, { color: COLORS.night, fill: true });
+    
+    const rightAngleSquareSide = 12;
+    const rightAngleSquareHeight = quadrant > 2 ? -rightAngleSquareSide : rightAngleSquareSide;
+    $drawRect(lineX, lineY, rightAngleSquareSide, rightAngleSquareHeight, { color: COLORS.gray, angle: tanCotAngle, lineWidth: 1 });
+    $drawRect(lineX, lineY, -rightAngleSquareSide, rightAngleSquareHeight, { color: COLORS.gray, angle: tanCotAngle, lineWidth: 1 });
+
+    config.drawLineRadius && $drawLine(x, y, lineX, lineY, { color: COLORS.night });
+
+    if (degree % 90) {
+      config.drawLineSin && $drawLine(lineX, lineY, lineX, y, { color: COLORS.purple });
+      config.drawLineCos && $drawLine(lineX, lineY, x, lineY, { color: COLORS.green });
+      config.drawLineTan && $drawLine(tanX, y, lineX, lineY, { color: COLORS.orange });
+      config.drawLineCot && $drawLine(lineX, lineY, x, cotY, { color: COLORS.pink });
+      config.drawLineSec && $drawLine(tanX, y, x, y, { color: COLORS.blue });
+      config.drawLineCsc && $drawLine(x, cotY, x, y, { color: COLORS.cyan });
+      config.drawNameRadius && $drawText(x + (lineX - x) / 2, y + (lineY - y) / 2, name.r, { color: COLORS.night, angle: -degree });
+      config.drawNameSin && $drawText(lineX + 1, y + (lineY - y) / 2, name.sin, { color: COLORS.purple, angle: 90 });
+      config.drawNameCos && $drawText(x + (lineX - x) / 2, lineY - 2, name.cos, { color: COLORS.green });
+      config.drawNameTan && $drawText(lineX + (tanX - lineX) / 2, y - 5 + (lineY - y) / 2, name.tan, { color: COLORS.orange, angle: tanCotAngle });
+      config.drawNameCot && $drawText(x + (lineX - x) / 2, lineY - 5 + (cotY - lineY) / 2, name.cot, { color: COLORS.pink, angle: tanCotAngle });
+      config.drawNameSec && $drawText(x + (tanX - x) / 2, y + 17, name.sec, { color: COLORS.blue });
+      config.drawNameCsc && $drawText(x - 17, y + (cotY - y) / 2, name.csc, { color: COLORS.cyan, angle: 90 });  
+    }
+
+    $drawCircle(lineX, lineY, 3, { color: COLORS.night, fill: true });
+
+    config.drawNameFPS && config.play && !$state.drag && $drawText(5, 17, `FPS: ${calculateFPS() || '-'}`, { align: 'left' });  
+    
+    config.drawNameInfo && $drawText(w - 10, 20, 'You can click & drag!', { align: 'right' });
+    
+    if (config.drawNameCredits) {
+      $drawText(w - 10, h - 42, '2018', { align: 'right' });
+      $drawText(w - 10, h - 27, 'trigonoparty', { align: 'right' });
+      $drawText(w - 10, h - 10, 'ramesaliyev', { align: 'right' });
+    }
+
+    config.play && !$state.drag && (state.degree += step);
+
+    if (state.degree > 360) {
+      state.degree %= 360;
+    } else if (state.degree < 0) {
+      state.degree += 360;
+    }
+
+    state.degreeInRad = degreeInRad;
+    state.sin = -sin;
+    state.cos = cos;
+    state.quadrant = quadrant;
+
+    !once && window.requestAnimationFrame(() => draw());
+  };
+
+  const setDegreeByClientPosition = (clientX, clienY) => {
+    const opposite = -(clienY - $state.y);
+    const adjacent = clientX - $state.x;
+    let degree = Math.atan(opposite / adjacent) * 360 / tPI;
+
+    if (adjacent < 0) {
+      degree += 180;
+    }
+    
+    state.degree = degree;
+    
+    draw(true);
+  };
+
+  canvas.addEventListener('mousedown', event => {
+    $state.drag = true;
+    setDegreeByClientPosition(
+      event.offsetX,
+      event.offsetY
+    );
+  });
+
+  canvas.addEventListener('mousemove', event => {
+    $state.drag && setDegreeByClientPosition(
+      event.offsetX,
+      event.offsetY
+    );
+  });
+
+  document.body.addEventListener('mouseup', () => {
+    $state.drag = false;
+    resetFPS();
+  });
+
+  const resize = () => {
+    const width = canvasWrapper.clientWidth;
+    const height = canvasWrapper.clientHeight;
+    
+    if (canvas.width !== width || canvas.height !== height) {
+      canvas.width = width;
+      canvas.height = height;
+      config.radius = null;
+    }
+  };
+
+  resize();
+  draw();
+
+  const togglePlay = () => {
+    config.play = !config.play;
+    resetFPS();
+  };
+
+  window.addEventListener('resize', resize);
+  window.tp = {
+    config,
+    state,
+    togglePlay,
+  };
+}
+    </script>
+  </body>
+</html>
